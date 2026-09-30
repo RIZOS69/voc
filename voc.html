@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Connected Words - English & French - 4º ESO</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #07111f;
+        color: white;
+    }
+
+    header {
+        background: #0757a0;
+        padding: 25px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 5px 0;
+        font-size: 2.4rem;
+    }
+
+    header p {
+        margin: 5px;
+        font-size: 1.2rem;
+    }
+
+    .controls {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    button {
+        border: 3px solid transparent;
+        border-radius: 14px;
+        padding: 15px 22px;
+        min-height: 60px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.03);
+    }
+
+    button:focus {
+        outline: 5px solid #ffd60a;
+        outline-offset: 3px;
+    }
+
+    .contrast-btn {
+        background: #000;
+        color: white;
+    }
+
+    .sound-btn {
+        background: #ffd60a;
+        color: #000;
+    }
+
+    .container {
+        width: 92%;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .progress-area {
+        padding: 25px 0 10px;
+    }
+
+    .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 25px;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 100%;
+        width: 10%;
+        background: #ffd60a;
+        transition: width 0.4s;
+    }
+
+    .card {
+        background: white;
+        color: #111;
+        border-radius: 25px;
+        padding: 40px;
+        margin: 25px 0;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    }
+
+    .card h2 {
+        font-size: 2rem;
+        margin-top: 0;
+    }
+
+    .big-icon {
+        font-size: 5rem;
+        text-align: center;
+    }
+
+    .intro-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .language-box {
+        padding: 25px;
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .english-box {
+        background: #d9ecff;
+        color: #073763;
+    }
+
+    .french-box {
+        background: #ffe0e0;
+        color: #7a0000;
+    }
+
+    .phrase {
+        background: #0757a0;
+        color: white;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: bold;
+        margin: 25px 0;
+    }
+
+    .connected {
+        color: #ffca05;
+        font-weight: 900;
+    }
+
+    .question {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin: 25px 0;
+    }
+
+    .answers {
+        display: grid;
+        gap: 15px;
+    }
+
+    .answer {
+        width: 100%;
+        text-align: left;
+        background: #eeeeee;
+        color: #111;
+        border: 3px solid #999;
+    }
+
+    .answer:hover {
+        background: #d8eaff;
+    }
+
+    .correct {
+        background: #087f23 !important;
+        color: white !important;
+        border-color: white !important;
+    }
+
+    .incorrect {
+        background: #b00020 !important;
+        color: white !important;
+        border-color: white !important;
+    }
+
+    .feedback {
+        margin-top: 20px;
+        min-height: 70px;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .listen-btn {
+        background: #087f23;
+        color: white;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .show-btn {
+        background: #ffd60a;
+        color: black;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .explanation {
+        background: #d9ecff;
+        color: #073763;
+        padding: 20px;
+        border-radius: 15px;
+        font-size: 1.15rem;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 25px 0 40px;
+    }
+
+    .back {
+        background: #555;
+        color: white;
+    }
+
+    .next {
+        background: #0757a0;
+        color: white;
+    }
+
+    button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .final-score {
+        background: #0757a0;
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        margin: 25px 0;
+    }
+
+    .final-number {
+        font-size: 5rem;
+        font-weight: bold;
+    }
+
+    .restart {
+        background: #0757a0;
+        color: white;
+    }
+
+    /* HIGH CONTRAST */
+
+    body.high-contrast {
+        background: #000;
+        color: #fff;
+    }
+
+    body.high-contrast header {
+        background: #000;
+        border-bottom: 4px solid white;
+    }
+
+    body.high-contrast .card {
+        background: #000;
+        color: white;
+        border: 3px solid white;
+    }
+
+    body.high-contrast .language-box,
+    body.high-contrast .explanation {
+        background: #000;
+        color: white;
+        border: 2px solid white;
+    }
+
+    body.high-contrast .answer {
+        background: #000;
+        color: white;
+        border-color: white;
+    }
+
+    body.high-contrast .phrase {
+        background: #000;
+        border: 3px solid white;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 700px) {
+
+        header h1 {
+            font-size: 1.8rem;
+        }
+
+        .card {
+            padding: 25px;
+        }
+
+        .intro-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .phrase {
+            font-size: 1.6rem;
+        }
+
+        .navigation {
+            flex-direction: column;
+        }
+
+        .navigation button {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+
+
+<body>
+
+<header>
+
+    <div class="container">
+
+        <p><strong>ENGLISH & FRENCH · 4º ESO</strong></p>
+
+        <h1>🔗 Connected Words</h1>
+
+        <p>Connected Speech & Liaison</p>
+
+        <div class="controls">
+
+            <button
+                id="contrastButton"
+                class="contrast-btn">
+                ◐ High Contrast
+            </button>
+
+            <button
+                id="soundButton"
+                class="sound-btn">
+                🔊 Sound ON
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <!-- PROGRESS -->
+
+    <div class="progress-area">
+
+        <div class="progress-info">
+
+            <span id="stepLabel">
+                Step 1 of 10
+            </span>
+
+            <span id="scoreLabel">
+                ⭐ Score: 0
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                id="progress"
+                class="progress">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY -->
+
+    <main id="activity"></main>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navigation">
+
+        <button
+            id="backButton"
+            class="back"
+            disabled>
+            ← BACK
+        </button>
+
+        <button
+            id="nextButton"
+            class="next">
+            NEXT →
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+const lessons = [
+
+    {
+        type: "intro",
+
+        title: "Step 1 · What are connected words?",
+
+        content: `
+            <div class="big-icon">🔗</div>
+
+            <p style="font-size:1.4rem;text-align:center;">
+                When we speak naturally, words can connect.
+            </p>
+
+            <div class="intro-grid">
+
+                <div class="language-box english-box">
+
+                    <h3>🇬🇧 ENGLISH</h3>
+
+                    <h2>Connected Speech</h2>
+
+                    <p>
+                        Sounds can connect between words.
+                    </p>
+
+                </div>
+
+                <div class="language-box french-box">
+
+                    <h3>🇫🇷 FRENCH</h3>
+
+                    <h2>Liaison</h2>
+
+                    <p>
+                        A final consonant can connect
+                        to the next word.
+                    </p>
+
+                </div>
+
+            </div>
+        `
+    },
+
+
+    {
+        type: "notice",
+
+        title: "Step 2 · Listen and notice",
+
+        question:
+            "Listen to the sentence and notice how the words connect.",
+
+        phrase:
+            "I want to eat.",
+
+        connected:
+            "I WANT_TO EAT",
+
+        language:
+            "en-US"
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 3 · English: consonant + vowel",
+
+        question:
+            "Which version shows the connection?",
+
+        phrase:
+            "Pick it up.",
+
+        language:
+            "en-US",
+
+        options: [
+            "PICK | IT | UP",
+            "PICK_IT | UP",
+            "PICK | IT_UP",
+            "PICKITUP"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 4 · English practice",
+
+        question:
+            "Which phrase contains a consonant → vowel connection?",
+
+        options: [
+            "pick it up",
+            "read books",
+            "play football",
+            "watch films"
+        ],
+
+        answer: 0
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 5 · English: weak forms",
+
+        question:
+            "Which sentence represents a natural weak form of CAN?",
+
+        options: [
+            "I CAN swim.",
+            "I can swim.",
+            "CAN I swim?",
+            "SWIM CAN I."
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 6 · French: liaison",
+
+        question:
+            "Where do we hear liaison?",
+
+        phrase:
+            "les amis",
+
+        language:
+            "fr-FR",
+
+        options: [
+            "les amis",
+            "les livres",
+            "la maison",
+            "une voiture"
+        ],
+
+        answer: 0
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 7 · French practice",
+
+        question:
+            "Which expression contains liaison?",
+
+        options: [
+            "les amis",
+            "la table",
+            "petite maison",
+            "une voiture"
+        ],
+
+        answer: 0
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 8 · English or French?",
+
+        question:
+            "What language is this example?",
+
+        phrase:
+            "pick it up",
+
+        language:
+            "en-US",
+
+        options: [
+            "🇬🇧 English",
+            "🇫🇷 French"
+        ],
+
+        answer: 0
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 9 · English or French?",
+
+        question:
+            "What language is this example?",
+
+        phrase:
+            "les amis",
+
+        language:
+            "fr-FR",
+
+        options: [
+            "🇬🇧 English",
+            "🇫🇷 French"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        type: "question",
+
+        title:
+            "Step 10 · Final challenge",
+
+        question:
+            "Which sentence demonstrates connected speech?",
+
+        options: [
+            "I want | to eat.",
+            "I want_to eat.",
+            "I | want | to | eat.",
+            "I want to | eat."
+        ],
+
+        answer: 1
+    }
+
+];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let currentStep = 0;
+
+let score = 0;
+
+let answered = false;
+
+let soundEnabled = true;
+
+let audioContext = null;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const activity =
+    document.getElementById("activity");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const backButton =
+    document.getElementById("backButton");
+
+const progress =
+    document.getElementById("progress");
+
+const stepLabel =
+    document.getElementById("stepLabel");
+
+const scoreLabel =
+    document.getElementById("scoreLabel");
+
+const contrastButton =
+    document.getElementById("contrastButton");
+
+const soundButton =
+    document.getElementById("soundButton");
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function getAudioContext() {
+
+    if (!audioContext) {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        if (!AudioContext) {
+            return null;
+        }
+
+        audioContext =
+            new AudioContext();
+    }
+
+    return audioContext;
+}
+
+
+function playTone(
+    frequency,
+    duration,
+    type = "sine"
+) {
+
+    if (!soundEnabled) {
+        return;
+    }
+
+    const ctx =
+        getAudioContext();
+
+    if (!ctx) {
+        return;
+    }
+
+    const oscillator =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+    oscillator.type = type;
+
+    oscillator.frequency.value =
+        frequency;
+
+    gain.gain.setValueAtTime(
+        0.0001,
+        ctx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.18,
+        ctx.currentTime + 0.02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        ctx.currentTime + duration
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(ctx.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+        ctx.currentTime + duration
+    );
+}
+
+
+function correctSound() {
+
+    playTone(660, 0.12);
+
+    setTimeout(
+        function() {
+            playTone(880, 0.15);
+        },
+        130
+    );
+}
+
+
+function wrongSound() {
+
+    playTone(
+        180,
+        0.25,
+        "square"
+    );
+}
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speak(text, language) {
+
+    if (!("speechSynthesis" in window)) {
+
+        alert(
+            "Speech synthesis is not available in this browser."
+        );
+
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang =
+        language || "en-US";
+
+    utterance.rate =
+        0.85;
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function render() {
+
+    const lesson =
+        lessons[currentStep];
+
+    answered = false;
+
+    stepLabel.textContent =
+        "Step " +
+        (currentStep + 1) +
+        " of " +
+        lessons.length;
+
+    scoreLabel.textContent =
+        "⭐ Score: " + score;
+
+    const percentage =
+        ((currentStep + 1) /
+        lessons.length) * 100;
+
+    progress.style.width =
+        percentage + "%";
+
+    backButton.disabled =
+        currentStep === 0;
+
+    nextButton.disabled = false;
+
+    nextButton.textContent =
+        currentStep === lessons.length - 1
+            ? "FINISH →"
+            : "NEXT →";
+
+
+    /* INTRO */
+
+    if (lesson.type === "intro") {
+
+        activity.innerHTML = `
+
+            <section class="card">
+
+                <h2>
+                    ${lesson.title}
+                </h2>
+
+                ${lesson.content}
+
+            </section>
+
+        `;
+
+        return;
+    }
+
+
+    /* NOTICE */
+
+    if (lesson.type === "notice") {
+
+        activity.innerHTML = `
+
+            <section class="card">
+
+                <h2>
+                    ${lesson.title}
+                </h2>
+
+                <p class="question">
+                    ${lesson.question}
+                </p>
+
+                <div class="phrase">
+                    ${lesson.phrase}
+                </div>
+
+                <button
+                    class="listen-btn"
+                    onclick="speak(
+                        '${lesson.phrase}',
+                        '${lesson.language}'
+                    )">
+
+                    🔊 LISTEN
+
+                </button>
+
+                <div
+                    class="explanation"
+                    style="text-align:center;">
+
+                    Connected speech:
+
+                    <br><br>
+
+                    <span style="font-size:2rem;">
+                        I WANT
+                        <span class="connected">
+                            _TO
+                        </span>
+                        EAT
+                    </span>
+
+                </div>
+
+                <button
+                    class="show-btn"
+                    onclick="showConnection()">
+
+                    👁️ SHOW EXPLANATION
+
+                </button>
+
+                <div
+                    id="connectionExplanation"
+                    class="explanation hidden">
+
+                    The final sound of one word can
+                    connect naturally with the beginning
+                    of the next word.
+
+                </div>
+
+            </section>
+
+        `;
+
+        return;
+    }
+
+
+    /* QUESTIONS */
+
+    let html = `
+
+        <section class="card">
+
+            <h2>
+                ${lesson.title}
+            </h2>
+    `;
+
+
+    if (lesson.phrase) {
+
+        html += `
+
+            <div class="phrase">
+
+                ${lesson.phrase}
+
+            </div>
+
+            <button
+                class="listen-btn"
+                onclick="speak(
+                    '${lesson.phrase}',
+                    '${lesson.language || "en-US"}'
+                )">
+
+                🔊 LISTEN
+
+            </button>
+
+        `;
+    }
+
+
+    html += `
+
+            <p class="question">
+                ${lesson.question}
+            </p>
+
+            <div class="answers">
+
+    `;
+
+
+    lesson.options.forEach(
+        function(option, index) {
+
+            html += `
+
+                <button
+                    class="answer"
+                    onclick="checkAnswer(${index})">
+
+                    ${String.fromCharCode(65 + index)}.
+                    ${option}
+
+                </button>
+
+            `;
+        }
+    );
+
+
+    html += `
+
+            </div>
+
+            <div
+                id="feedback"
+                class="feedback">
+
+            </div>
+
+        </section>
+
+    `;
+
+
+    activity.innerHTML =
+        html;
+}
+
+
+/* =====================================================
+   ANSWER CHECK
+===================================================== */
+
+function checkAnswer(index) {
+
+    if (answered) {
+        return;
+    }
+
+    answered = true;
+
+    const lesson =
+        lessons[currentStep];
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+    const feedback =
+        document.getElementById("feedback");
+
+
+    if (index === lesson.answer) {
+
+        buttons[index]
+            .classList
+            .add("correct");
+
+        feedback.innerHTML = `
+
+            <div class="correct"
+                 style="
+                 padding:20px;
+                 border-radius:15px;
+                 ">
+
+                ✅ CORRECT!
+
+                <br>
+
+                <span style="font-size:1rem;">
+                    Well done! Excellent work.
+                </span>
+
+            </div>
+
+        `;
+
+        score++;
+
+        correctSound();
+
+    } else {
+
+        buttons[index]
+            .classList
+            .add("incorrect");
+
+        buttons[lesson.answer]
+            .classList
+            .add("correct");
+
+        feedback.innerHTML = `
+
+            <div class="incorrect"
+                 style="
+                 padding:20px;
+                 border-radius:15px;
+                 ">
+
+                ❌ NOT QUITE.
+
+                <br>
+
+                <span style="font-size:1rem;">
+                    Correct answer:
+                    <strong>
+                        ${lesson.options[lesson.answer]}
+                    </strong>
+                </span>
+
+            </div>
+
+        `;
+
+        wrongSound();
+    }
+
+
+    buttons.forEach(
+        function(button) {
+
+            button.disabled = true;
+
+        }
+    );
+
+
+    scoreLabel.textContent =
+        "⭐ Score: " + score;
+}
+
+
+/* =====================================================
+   EXPLANATION
+===================================================== */
+
+function showConnection() {
+
+    const explanation =
+        document.getElementById(
+            "connectionExplanation"
+        );
+
+    if (explanation) {
+
+        explanation.classList.toggle(
+            "hidden"
+        );
+
+    }
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+nextButton.addEventListener(
+    "click",
+    function() {
+
+        if (
+            currentStep <
+            lessons.length - 1
+        ) {
+
+            currentStep++;
+
+            render();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        } else {
+
+            showFinal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+backButton.addEventListener(
+    "click",
+    function() {
+
+        if (currentStep > 0) {
+
+            currentStep--;
+
+            render();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FINAL SCREEN
+===================================================== */
+
+function showFinal() {
+
+    /*
+       There are 8 scored questions:
+       Steps 3-10.
+    */
+
+    const totalQuestions = 8;
+
+    const percentage =
+        Math.round(
+            (score / totalQuestions) * 100
+        );
+
+
+    let message;
+
+    if (percentage >= 80) {
+
+        message =
+            "🌟 Excellent work!";
+
+    } else if (percentage >= 60) {
+
+        message =
+            "👍 Good work! Keep practising!";
+
+    } else {
+
+        message =
+            "💪 Keep practising! You can do it!";
+
+    }
+
+
+    activity.innerHTML = `
+
+        <section class="card"
+                 style="text-align:center;">
+
+            <div class="big-icon">
+                🏆
+            </div>
+
+            <h2>
+                GREAT JOB!
+            </h2>
+
+            <p style="font-size:1.4rem;">
+                You completed the
+                Connected Words challenge.
+            </p>
+
+            <div class="final-score">
+
+                <div class="final-number">
+                    ${score}/${totalQuestions}
+                </div>
+
+                <div style="font-size:1.5rem;">
+                    ${percentage}%
+                </div>
+
+            </div>
+
+            <p style="
+                font-size:1.6rem;
+                font-weight:bold;
+            ">
+
+                ${message}
+
+            </p>
+
+            <button
+                class="restart"
+                onclick="restart()">
+
+                🔄 TRY AGAIN
+
+            </button>
+
+        </section>
+
+    `;
+
+
+    nextButton.disabled = true;
+
+    progress.style.width =
+        "100%";
+
+    stepLabel.textContent =
+        "Completed";
+
+}
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restart() {
+
+    currentStep = 0;
+
+    score = 0;
+
+    answered = false;
+
+    render();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =====================================================
+   HIGH CONTRAST
+===================================================== */
+
+contrastButton.addEventListener(
+    "click",
+    function() {
+
+        document.body.classList.toggle(
+            "high-contrast"
+        );
+
+        const active =
+            document.body.classList.contains(
+                "high-contrast"
+            );
+
+        contrastButton.textContent =
+            active
+                ? "◑ High Contrast ON"
+                : "◐ High Contrast";
+
+    }
+);
+
+
+/* =====================================================
+   SOUND ON / OFF
+===================================================== */
+
+soundButton.addEventListener(
+    "click",
+    function() {
+
+        soundEnabled =
+            !soundEnabled;
+
+        soundButton.textContent =
+            soundEnabled
+                ? "🔊 Sound ON"
+                : "🔇 Sound OFF";
+
+    }
+);
+
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "ArrowRight" &&
+            !nextButton.disabled
+        ) {
+
+            nextButton.click();
+
+        }
+
+        if (
+            event.key === "ArrowLeft" &&
+            !backButton.disabled
+        ) {
+
+            backButton.click();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+render();
+
+</script>
+
+</body>
+</html>
